@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "node-libxml": "^4.1.2"
+  },
+  "name": "seminario",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vfdutra/marcacoes-extensiveis.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vfdutra/marcacoes-extensiveis/issues"
+  },
+  "homepage": "https://github.com/vfdutra/marcacoes-extensiveis#readme"
+}

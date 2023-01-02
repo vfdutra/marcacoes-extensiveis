@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT poema (titulo, autor, corpo, data)>
+<!ATTLIST poema 
+    tipo CDATA #REQUIRED
+>
+<!ELEMENT titulo (#PCDATA)>
+<!ELEMENT autor (#PCDATA)>
+<!ELEMENT corpo (quadra, quadra, terno, terno)>
+<!ELEMENT quadra (verso, verso, verso, verso)>
+<!ELEMENT terno (verso, verso, verso)>
+<!ELEMENT verso ( #PCDATA | nome | lugar)*>
+<!ELEMENT data (#PCDATA)>
+<!ELEMENT lugar (#PCDATA)>
+<!ELEMENT nome (#PCDATA)>
