@@ -1,0 +1,61 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT topicMap (topic+,association+)>
+<!ATTLIST topicMap
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT topic ((instanceOf|subjectIdentity)?,baseName+,occurrence*)>
+<!ATTLIST topic
+  xmlns CDATA #FIXED ''
+  id NMTOKEN #REQUIRED>
+
+<!ELEMENT association (instanceOf,member+)>
+<!ATTLIST association
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT subjectIdentity (subjectIndicatorRef)>
+<!ATTLIST subjectIdentity
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT baseName (scope?,baseNameString)>
+<!ATTLIST baseName
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT occurrence ((instanceOf,resourceRef)|(scope,resourceData))>
+<!ATTLIST occurrence
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT member (topicRef)>
+<!ATTLIST member
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT subjectIndicatorRef EMPTY>
+<!ATTLIST subjectIndicatorRef
+  xmlns CDATA #FIXED ''
+  href CDATA #REQUIRED>
+
+<!ELEMENT baseNameString (#PCDATA)>
+<!ATTLIST baseNameString
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT resourceRef EMPTY>
+<!ATTLIST resourceRef
+  xmlns CDATA #FIXED ''
+  href CDATA #REQUIRED>
+
+<!ELEMENT resourceData (#PCDATA)>
+<!ATTLIST resourceData
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT instanceOf (topicRef)>
+<!ATTLIST instanceOf
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT scope (topicRef)>
+<!ATTLIST scope
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT topicRef EMPTY>
+<!ATTLIST topicRef
+  xmlns CDATA #FIXED ''
+  href CDATA #REQUIRED>
