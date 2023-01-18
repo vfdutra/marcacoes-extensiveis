@@ -18,6 +18,24 @@ topic.forEach((movie, index) => {
     let movie_supporting = xpath.select(`//topicMap/topic[@id="${movie_id}"]/occurrence/scope/topicRef[@href="#elencoApoio"]/../following-sibling::resourceData`, doc);
     let movie_site = xpath.select(`//topicMap/topic[@id="${movie_id}"]/occurrence/instanceOf/topicRef[@href="#site"]/../following-sibling::resourceRef/@href`, doc);
 
+    let movie_associations = xpath.select(`//*[@href="#${movie_id}"]/../following-sibling::member/topicRef/@href`, doc);
+
+    let movie_association_year = movie_associations[0].nodeValue.replace("#", "");
+        let movie_year = xpath.select(`number(//topic[@id='${movie_association_year}']/baseName/baseNameString)`, doc);
+
+    let movie_association_director = movie_associations[1].nodeValue.replace("#", "");
+        let movie_director = xpath.select(`string(//topic[@id='${movie_association_director}']/baseName/baseNameString)`, doc);
+
+    let teste = movie_associations[2].nodeValue.replace("#", "");
+    
+    if(/^\d+$/.test(teste)){               
+        let movie_duration = xpath.select(`number(//topic[@id='${teste}']/baseName/baseNameString)`, doc);
+        console.log(movie_duration)
+    }
+
+    let movie_actors= []
+    let movie_genre = movie_associations[3].nodeValue;
+
     var html = `
           <!DOCTYPE html>
             <html>
