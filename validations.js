@@ -1,12 +1,21 @@
 const Libxml = require('node-libxml');
 let libxml = new Libxml();
 libxml.loadXml('arquivo.xml');
+
 libxml.loadDtds(['arquivo.dtd']);
 let xmsIsValidBasedOfDTD = libxml.validateAgainstDtds();
-// If the DTD validation generates errors, they are stored in the validationDtdErrors property
-console.log(libxml.validationDtdErrors);
 
 libxml.loadSchemas(['arquivo.xsd']);
 let xmsIsValidBasedOfXSD = libxml.validateAgainstSchemas();
-// If the XSD validation generates errors, they are stored in the validationSchemaErrors property
-console.log(libxml.validationSchemaErrors);
+
+if(libxml.validateAgainstDtds() === false) {
+    console.log(libxml.validationDtdErrors);
+} else {
+    console.log('De acordo com o DTD carregado, o XML é valido');
+}
+
+if(libxml.validateAgainstSchemas() === false) {
+    console.log(libxml.validationSchemaErrors);
+} else {
+    console.log('De acordo com o XML Schema carregado, o XML é valido');
+}
