@@ -78,7 +78,7 @@ topic.forEach((movie, index) => {
     var movie_supporting_actors = []
     for(var i = 0; i < movie_supporting.length; i++){
         movie_supporting_actors[i] = movie_supporting[i].firstChild.data;
-    }
+    }    
 
     movie_supporting_actors = movie_supporting_actors.filter(function(item, pos) {
         return movie_supporting_actors.indexOf(item) == pos;
@@ -128,7 +128,7 @@ topic.forEach((movie, index) => {
                 if(movie_supporting_actors[0] != null && movie_supporting_actors[0] != undefined){
                     html += `<h3>Atores suporte</h3>`
                     movie_supporting_actors.forEach((supporting) => {                                                
-                        html += `<h4><a href="../atores/${supporting}.html" target="_blank">${supporting}</a><h4>`;
+                        html += `<h4>${supporting}<h4>`;
                     });
                 }
                
@@ -183,146 +183,146 @@ fs.writeFileSync(`index.html`, html, (err) => {
 });   
 
 
-let all_actors = xpath.select(`//association/instanceOf/topicRef[@href="#filme-elenco"]/../following-sibling::member[2]/topicRef/@href`, doc);
+// let all_actors = xpath.select(`//association/instanceOf/topicRef[@href="#filme-elenco"]/../following-sibling::member[2]/topicRef/@href`, doc);
 
-all_actors.forEach((actor) => {
-    actor_id = actor.nodeValue
+// all_actors.forEach((actor) => {
+//     actor_id = actor.nodeValue
 
-    let actor_movies = xpath.select(`//association/member/topicRef[@href="${actor_id}"]/../preceding-sibling::member/topicRef/@href`, doc)
+//     let actor_movies = xpath.select(`//association/member/topicRef[@href="${actor_id}"]/../preceding-sibling::member/topicRef/@href`, doc)
 
-    var html_actors = `<!DOCTYPE html>
-                <html>
-                    <head>
-                        <meta charset="UTF-8" />
-                        <title>${actor_id}</title>
-                    </head>
-                    <body>`;
-                    html_actors += `<h1>${actor_id.replace("#","").replace("-", " ")}</h1>`
-                    actor_movies.forEach((movie) => {
-                        html_actors += `<h2><a href="../filmes/${movie.nodeValue.replace("#", "")}.html" target="_blank">${movie.nodeValue.replace("#","").replace("-", " ")}</a></h2>`
-                     })
-                html_actors += `</body></html>`;
+//     var html_actors = `<!DOCTYPE html>
+//                 <html>
+//                     <head>
+//                         <meta charset="UTF-8" />
+//                         <title>${actor_id}</title>
+//                     </head>
+//                     <body>`;
+//                     html_actors += `<h1>${actor_id.replace("#","").replace("-", " ")}</h1>`
+//                     actor_movies.forEach((movie) => {
+//                         html_actors += `<h2><a href="../filmes/${movie.nodeValue.replace("#", "")}.html" target="_blank">${movie.nodeValue.replace("#","").replace("-", " ")}</a></h2>`
+//                      })
+//                 html_actors += `</body></html>`;
 
-    fs.writeFileSync(`atores/${actor_id.replace("#","")}.html`, html_actors, (err) => {
-             if(err) {
-                 console.log(err);
-                 return;
-             }    
-             console.log('File created successfully!');
-        });
-})
+//     fs.writeFileSync(`atores/${actor_id.replace("#","")}.html`, html_actors, (err) => {
+//              if(err) {
+//                  console.log(err);
+//                  return;
+//              }    
+//              console.log('File created successfully!');
+//         });
+// })
 
-let all_directors = xpath.select(`//association/instanceOf/topicRef[@href="#filme-direcao"]/../following-sibling::member[2]/topicRef/@href`, doc);
+// let all_directors = xpath.select(`//association/instanceOf/topicRef[@href="#filme-direcao"]/../following-sibling::member[2]/topicRef/@href`, doc);
 
-all_directors.forEach((director) => {
-    director_id = director.nodeValue
+// all_directors.forEach((director) => {
+//     director_id = director.nodeValue
 
-    let director_movies = xpath.select(`//association/member/topicRef[@href="${director_id}"]/../preceding-sibling::member/topicRef/@href`, doc)
+//     let director_movies = xpath.select(`//association/member/topicRef[@href="${director_id}"]/../preceding-sibling::member/topicRef/@href`, doc)
 
-    var html_directors = `<!DOCTYPE html>
-                <html>
-                    <head>
-                        <meta charset="UTF-8" />
-                        <title>${director_id}</title>
-                    </head>
-                    <body>`;
-                    html_directors += `<h1>${director_id.replace("#","").replace("-", " ")}</h1>`
-                    director_movies.forEach((movie) => {
-                        html_directors += `<h2><a href="../filmes/${movie.nodeValue.replace("#", "")}.html" target="_blank">${movie.nodeValue.replace("#","").replace("-", " ")}</a></h2>`
-                     })
-                html_directors += `</body></html>`;
+//     var html_directors = `<!DOCTYPE html>
+//                 <html>
+//                     <head>
+//                         <meta charset="UTF-8" />
+//                         <title>${director_id}</title>
+//                     </head>
+//                     <body>`;
+//                     html_directors += `<h1>${director_id.replace("#","").replace("-", " ")}</h1>`
+//                     director_movies.forEach((movie) => {
+//                         html_directors += `<h2><a href="../filmes/${movie.nodeValue.replace("#", "")}.html" target="_blank">${movie.nodeValue.replace("#","").replace("-", " ")}</a></h2>`
+//                      })
+//                 html_directors += `</body></html>`;
 
-    fs.writeFileSync(`diretores/${director_id.replace("#","")}.html`, html_directors, (err) => {
-                if(err) {
-                    console.log(err);
-                    return;
-                }    
-                console.log('File created successfully!');
-            });
-});
+//     fs.writeFileSync(`diretores/${director_id.replace("#","")}.html`, html_directors, (err) => {
+//                 if(err) {
+//                     console.log(err);
+//                     return;
+//                 }    
+//                 console.log('File created successfully!');
+//             });
+// });
 
-let all_years = xpath.select(`//association/instanceOf/topicRef[@href="#filme-ano"]/../following-sibling::member[2]/topicRef/@href`, doc);
+// let all_years = xpath.select(`//association/instanceOf/topicRef[@href="#filme-ano"]/../following-sibling::member[2]/topicRef/@href`, doc);
 
-all_years.forEach((year) => {
-    year_id = year.nodeValue
+// all_years.forEach((year) => {
+//     year_id = year.nodeValue
 
-    let year_movies = xpath.select(`//association/member/topicRef[@href="${year_id}"]/../preceding-sibling::member/topicRef/@href`, doc)
+//     let year_movies = xpath.select(`//association/member/topicRef[@href="${year_id}"]/../preceding-sibling::member/topicRef/@href`, doc)
 
-    var html_years = `<!DOCTYPE html>
-                <html>
-                    <head>
-                        <meta charset="UTF-8" />
-                        <title>${year_id.replace("#", "").replace("_", "").replace("id", "")}</title>
-                    </head>
-                    <body>`;
-                    html_years += `<h1>${year_id.replace("#", "").replace("_", "").replace("id", "")}</h1>`
-                    year_movies.forEach((movie) => {
-                        html_years += `<h2><a href="../filmes/${movie.nodeValue.replace("#", "")}.html" target="_blank">${movie.nodeValue.replace("#","").replace("-", " ")}</a></h2>`
-                     })
-                html_years += `</body></html>`;
-    fs.writeFileSync(`anos/${year_id.replace("#", "").replace("_", "").replace("id", "")}.html`, html_years, (err) => {
-                if(err) {
-                    console.log(err);
-                    return;
-                }    
-                console.log('File created successfully!');
-            } )
-});
+//     var html_years = `<!DOCTYPE html>
+//                 <html>
+//                     <head>
+//                         <meta charset="UTF-8" />
+//                         <title>${year_id.replace("#", "").replace("_", "").replace("id", "")}</title>
+//                     </head>
+//                     <body>`;
+//                     html_years += `<h1>${year_id.replace("#", "").replace("_", "").replace("id", "")}</h1>`
+//                     year_movies.forEach((movie) => {
+//                         html_years += `<h2><a href="../filmes/${movie.nodeValue.replace("#", "")}.html" target="_blank">${movie.nodeValue.replace("#","").replace("-", " ")}</a></h2>`
+//                      })
+//                 html_years += `</body></html>`;
+//     fs.writeFileSync(`anos/${year_id.replace("#", "").replace("_", "").replace("id", "")}.html`, html_years, (err) => {
+//                 if(err) {
+//                     console.log(err);
+//                     return;
+//                 }    
+//                 console.log('File created successfully!');
+//             } )
+// });
 
-let all_genres = xpath.select(`//association/instanceOf/topicRef[@href="#filme-genero"]/../following-sibling::member[2]/topicRef/@href`, doc);
+// let all_genres = xpath.select(`//association/instanceOf/topicRef[@href="#filme-genero"]/../following-sibling::member[2]/topicRef/@href`, doc);
 
-all_genres.forEach((genre) => {
-    genre_id = genre.nodeValue
+// all_genres.forEach((genre) => {
+//     genre_id = genre.nodeValue
 
-    let genre_movies = xpath.select(`//association/member/topicRef[@href="${genre_id}"]/../preceding-sibling::member/topicRef/@href`, doc)
+//     let genre_movies = xpath.select(`//association/member/topicRef[@href="${genre_id}"]/../preceding-sibling::member/topicRef/@href`, doc)
 
-    var html_genres = `<!DOCTYPE html>
-                <html>
-                    <head>
-                        <meta charset="UTF-8" />
-                        <title>${genre_id}</title>
-                    </head>
-                    <body>`;
-                    html_genres += `<h1>${genre_id.replace("#","").replace("-", " ")}</h1>`
-                    genre_movies.forEach((movie) => {
-                        html_genres += `<h2><a href="../filmes/${movie.nodeValue.replace("#", "")}.html" target="_blank">${movie.nodeValue.replace("#","").replace("-", " ")}</a></h2>`
-                     })
-                html_genres += `</body></html>`;
+//     var html_genres = `<!DOCTYPE html>
+//                 <html>
+//                     <head>
+//                         <meta charset="UTF-8" />
+//                         <title>${genre_id}</title>
+//                     </head>
+//                     <body>`;
+//                     html_genres += `<h1>${genre_id.replace("#","").replace("-", " ")}</h1>`
+//                     genre_movies.forEach((movie) => {
+//                         html_genres += `<h2><a href="../filmes/${movie.nodeValue.replace("#", "")}.html" target="_blank">${movie.nodeValue.replace("#","").replace("-", " ")}</a></h2>`
+//                      })
+//                 html_genres += `</body></html>`;
 
-    fs.writeFileSync(`generos/${genre_id.replace("#","")}.html`, html_genres, (err) => {
-                if(err) {
-                    console.log(err);
-                    return;
-                }    
-                console.log('File created successfully!');
-            });
-})
+//     fs.writeFileSync(`generos/${genre_id.replace("#","")}.html`, html_genres, (err) => {
+//                 if(err) {
+//                     console.log(err);
+//                     return;
+//                 }    
+//                 console.log('File created successfully!');
+//             });
+// })
 
-let all_durations = xpath.select(`//association/instanceOf/topicRef[@href="#filme-duracao"]/../following-sibling::member[2]/topicRef/@href`, doc);
+// let all_durations = xpath.select(`//association/instanceOf/topicRef[@href="#filme-duracao"]/../following-sibling::member[2]/topicRef/@href`, doc);
 
-all_durations.forEach((duration) => {
-    duration_id = duration.nodeValue
+// all_durations.forEach((duration) => {
+//     duration_id = duration.nodeValue
 
-    let duration_movies = xpath.select(`//association/member/topicRef[@href="${duration_id}"]/../preceding-sibling::member/topicRef/@href`, doc)
+//     let duration_movies = xpath.select(`//association/member/topicRef[@href="${duration_id}"]/../preceding-sibling::member/topicRef/@href`, doc)
 
-    var html_durations = `<!DOCTYPE html>
-                <html>
-                    <head>
-                        <meta charset="UTF-8" />
-                        <title>${duration_id.replace("#", "").replace("_", "").replace("id", "")}</title>
-                    </head>
-                    <body>`;
-                    html_durations += `<h1>${duration_id.replace("#", "").replace("_", "").replace("id", "")}</h1>`
-                    duration_movies.forEach((movie) => {
-                        html_durations += `<h2><a href="../filmes/${movie.nodeValue.replace("#", "")}.html" target="_blank">${movie.nodeValue.replace("#","").replace("-", " ")}</a></h2>`
-                     })
-                html_durations += `</body></html>`;
+//     var html_durations = `<!DOCTYPE html>
+//                 <html>
+//                     <head>
+//                         <meta charset="UTF-8" />
+//                         <title>${duration_id.replace("#", "").replace("_", "").replace("id", "")}</title>
+//                     </head>
+//                     <body>`;
+//                     html_durations += `<h1>${duration_id.replace("#", "").replace("_", "").replace("id", "")}</h1>`
+//                     duration_movies.forEach((movie) => {
+//                         html_durations += `<h2><a href="../filmes/${movie.nodeValue.replace("#", "")}.html" target="_blank">${movie.nodeValue.replace("#","").replace("-", " ")}</a></h2>`
+//                      })
+//                 html_durations += `</body></html>`;
 
-    fs.writeFileSync(`duracoes/${duration_id.replace("#", "").replace("_", "").replace("id", "")}.html`, html_durations, (err) => {
-                if(err) {
-                    console.log(err);
-                    return;
-                }    
-                console.log('File created successfully!');
-            });
-})
+//     fs.writeFileSync(`duracoes/${duration_id.replace("#", "").replace("_", "").replace("id", "")}.html`, html_durations, (err) => {
+//                 if(err) {
+//                     console.log(err);
+//                     return;
+//                 }    
+//                 console.log('File created successfully!');
+//             });
+// })
