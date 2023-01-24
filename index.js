@@ -5,6 +5,30 @@ var doc = new dom().parseFromString(xml, 'text/xml');
 
 const http = require('http');
 
+if(!fs.existsSync('anos')){
+    fs.mkdirSync('anos');
+}
+
+if(!fs.existsSync('atores')){
+    fs.mkdirSync('atores');
+}
+
+if(!fs.existsSync('diretores')){
+    fs.mkdirSync('diretores');
+}
+
+if(!fs.existsSync('duracoes')){
+    fs.mkdirSync('duracoes');
+}
+
+if(!fs.existsSync('filmes')){
+    fs.mkdirSync('filmes');
+}
+    
+if(!fs.existsSync('generos')){
+    fs.mkdirSync('generos');
+}
+
 let topic = xpath.select('//topicMap/topic/instanceOf/topicRef[@href="#Filme"]/../../@id', doc);
 topic.forEach((movie, index) => {    
     let movie_id = movie.value;

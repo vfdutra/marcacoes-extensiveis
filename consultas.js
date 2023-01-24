@@ -3,6 +3,10 @@ var fs = require('fs');
 var xml = fs.readFileSync('arquivo.xml', 'utf8');
 var doc = new dom().parseFromString(xml, 'text/xml');
 
+if(!fs.existsSync('consultas')){
+    fs.mkdirSync('consultas');
+}
+
 //Find all the genres
 let nodes = xpath.select('//topicMap/topic/instanceOf/topicRef[@href="#Genero"]/parent::*/following-sibling::baseName/baseNameString', doc);
 
@@ -48,46 +52,46 @@ fs.writeFile('consultas/questao01.html', questao_1, (err) => {
 });
 
 //Find all the movies from 2000's
-let movies_2000 = xpath.select('//association/member/topicRef[@href="#id_2000"]/../preceding-sibling::member/topicRef/@href', doc);
+// let movies_2000 = xpath.select('//association/member/topicRef[@href="#id_2000"]/../preceding-sibling::member/topicRef/@href', doc);
 
-//Ordernar por ordem alfabetica
-movies_2000.sort()
-var questao_2 = `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="UTF-8" />
-            <title>Filmes do ano de 2000</title>
-          </head>
-          <body>
-            <h1>b) Quais são os títulos dos filmes que foram produzidos em 2000, ordenados alfabeticamente?</h1>
-            <ul>
-        `;
-        movies_2000.map((movie) => {
-          let movie_name = movie.nodeValue.replace('#', '').replace("_", "").replace("id", "");
+// //Ordernar por ordem alfabetica
+// movies_2000.sort()
+// var questao_2 = `
+//         <!DOCTYPE html>
+//         <html>
+//           <head>
+//             <meta charset="UTF-8" />
+//             <title>Filmes do ano de 2000</title>
+//           </head>
+//           <body>
+//             <h1>b) Quais são os títulos dos filmes que foram produzidos em 2000, ordenados alfabeticamente?</h1>
+//             <ul>
+//         `;
+//         movies_2000.map((movie) => {
+//           let movie_name = movie.nodeValue.replace('#', '').replace("_", "").replace("id", "");
       
-          //Retirar todos os - do nome do filme
-          movie_name = movie_name.replace(/-/g, ' ');
+//           //Retirar todos os - do nome do filme
+//           movie_name = movie_name.replace(/-/g, ' ');
       
-          //Deixar a primeira letra maiuscula de todas as palavras
-          movie_name = movie_name.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+//           //Deixar a primeira letra maiuscula de todas as palavras
+//           movie_name = movie_name.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 
-          questao_2 += `<li>${movie_name}</li>`;
-      })
+//           questao_2 += `<li>${movie_name}</li>`;
+//       })
 
-        questao_2 += `
-            </ul>
-          </body>
-        </html>
-        `;
+//         questao_2 += `
+//             </ul>
+//           </body>
+//         </html>
+//         `;
 
-fs.writeFile('consultas/questao02.html', questao_2, (err) => {
-  if (err) {
-      console.log(err);
-      return;
-  }
-  console.log('File created successfully!')
-});
+// fs.writeFile('consultas/questao02.html', questao_2, (err) => {
+//   if (err) {
+//       console.log(err);
+//       return;
+//   }
+//   console.log('File created successfully!')
+// });
 
 // // Find all the movies with 'special' on the synopsis
 // let special_movies = xpath.select("//topic/occurrence/scope/topicRef[@href='#sinopse']/following::resourceData[contains(text(), 'especial') and not(contains(text(), 'especialista'))]/parent::*/preceding-sibling::occurrence/scope/topicRef[@href='#ingles']/../following-sibling::resourceData", doc);
@@ -124,42 +128,42 @@ fs.writeFile('consultas/questao02.html', questao_2, (err) => {
 // });
         
 // // Get the site from the thriller movies
-let thriller_movies = xpath.select('//association/member/topicRef[@href="#thriller"]/../preceding-sibling::member/topicRef/@href', doc);
+// let thriller_movies = xpath.select('//association/member/topicRef[@href="#thriller"]/../preceding-sibling::member/topicRef/@href', doc);
 
-movies_sites = thriller_movies.map((movie) => {
-  let movie_name = movie.nodeValue.replace('#', '');   
+// movies_sites = thriller_movies.map((movie) => {
+//   let movie_name = movie.nodeValue.replace('#', '');   
 
-  return xpath.select(`string(//topicMap/topic[@id="${movie_name}"]/occurrence/resourceRef/@href)`, doc);
-})
+//   return xpath.select(`string(//topicMap/topic[@id="${movie_name}"]/occurrence/resourceRef/@href)`, doc);
+// })
 
-var questao_4 = `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="UTF-8" />
-            <title>Filmes Thriller</title>
-          </head>
-          <body>
-            <h1>d) Quais são os sites dos filmes que são do tipo “thriller”?</h1>
-            <ul>        
-        `;
-        movies_sites.map((movie) => {        
-          if(movie !== "") questao_4 += `<li>${movie}</li>`;       
-        });
+// var questao_4 = `
+//         <!DOCTYPE html>
+//         <html>
+//           <head>
+//             <meta charset="UTF-8" />
+//             <title>Filmes Thriller</title>
+//           </head>
+//           <body>
+//             <h1>d) Quais são os sites dos filmes que são do tipo “thriller”?</h1>
+//             <ul>        
+//         `;
+//         movies_sites.map((movie) => {        
+//           if(movie !== "") questao_4 += `<li>${movie}</li>`;       
+//         });
 
-          questao_4 += `
-          </ul>
-          </body>
-        </html>
-        `;
+//           questao_4 += `
+//           </ul>
+//           </body>
+//         </html>
+//         `;
 
-fs.writeFile('consultas/questao04.html', questao_4, (err) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  console.log('File created successfully!')
-});
+// fs.writeFile('consultas/questao04.html', questao_4, (err) => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   console.log('File created successfully!')
+// });
 
 // //Get the number of movies with more than 3 elenco-apoio
 // let $topics = xpath.select('//topic', doc); 
