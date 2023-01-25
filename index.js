@@ -3,8 +3,6 @@ var fs = require('fs');
 var xml = fs.readFileSync('arquivo.xml', 'utf8');
 var doc = new dom().parseFromString(xml, 'text/xml');
 
-const http = require('http');
-
 if(!fs.existsSync('anos')){
     fs.mkdirSync('anos');
 }
